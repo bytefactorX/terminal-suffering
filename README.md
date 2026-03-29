@@ -12,19 +12,25 @@ Terminal suffering is a simple, text-based dungeon crawler in C. Fight increasin
 First, clone the repo: 
 
 ```
-git clone https://github.com/bytefactorX/terminal-suffering.git
+$ git clone https://github.com/bytefactorX/terminal-suffering.git
 ```
 
 cd into the repo: 
 
 ```
-cd teminal-suffering/
+$ cd teminal-suffering/
 ```
 
-Then, run the make command:
+Finally, run the make command + run the executable:
 
 ```
-make
+$ make && ./game
+```
+
+To clean any build files, run this command in the game's directory:
+
+```
+$ make clean
 ```
 
 ## Features Yet to Implement
