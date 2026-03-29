@@ -4,7 +4,7 @@
 
 // initialize starting values
 void init_player(Player *p) {
-    printf("Before your journey begins, please provide your name: ");
+    printf("Before your journey begins, please provide your name $ ");
     
     if (fgets(p->name, sizeof(p->name), stdin)) {
         p->name[strcspn(p->name, "\n")] = '\0';
@@ -37,6 +37,10 @@ void upgrade_player(Player *p) {
     return;
 }
 
-void damage_player(Player *p, int dmg) {
-    p->health -= dmg;
+int calc_crit_dmg(Player *p) {
+    float crit_mul = 1.5;
+    int crit_value;
+    crit_value = (p->attack + p->level) * crit_mul;
+
+    return crit_value;
 }

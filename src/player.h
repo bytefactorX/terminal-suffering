@@ -16,8 +16,9 @@ void init_player(struct Player *p);
 
 void level_up(struct Player *p);
 
+// not yet implemented
 void upgrade_player(struct Player *p);
 
-void damage_player(struct Player *p, int dmg);
+int calc_crit_dmg(struct Player *p);
 
 #endif

@@ -26,11 +26,31 @@ int main() {
 
     while (player_turn) {
         print_battle_options(battle_options, NUM_BATTLE_OPTIONS);
-        player_select(battle_options, NUM_BATTLE_OPTIONS);
+        int option_choice = player_select(battle_options, NUM_BATTLE_OPTIONS);
+
+        switch(option_choice) {
+            case 0:
+                player_attack(&p, &e);
+                player_turn = false;
+                break;
+            case 1:
+                printf("Run sp attack (mp) func here..\n");
+                player_turn = false;
+                break;
+            case 2:
+                printf("Run item use func here..\n");
+                player_turn = false;
+                break;
+            case 3:
+                player_run(&p);
+                break;
+            default:
+                printf("Invalid choice selected.\n");
+        }
         break;
     }
     while (!player_turn) {
-        printf("Not player's turn, enemy will fight here.\n");
+        enemy_attack(&p, &e);
         break;
     }
 

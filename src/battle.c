@@ -8,6 +8,13 @@
 #include <stdbool.h>
 #include <string.h>
 
+char *battle_options[NUM_BATTLE_OPTIONS] = {
+    "Attack",
+    "Sp Attack", // uses MP 
+    "Item",
+    "Run"
+};
+
 bool determine_turn(Player *p, Enemy *e) {
     bool player_turn;
 
@@ -23,13 +30,6 @@ bool determine_turn(Player *p, Enemy *e) {
     return player_turn;
 }
 
-char *battle_options[NUM_BATTLE_OPTIONS] = {
-    "Attack",
-    "Sp Attack", // uses MP 
-    "Item",
-    "Run"
-};
-
 // TODO: figure out cleaner print
 void print_battle_options(char *battle_options[], int count) {
     // decays down to char**, need to use a count
@@ -39,11 +39,10 @@ void print_battle_options(char *battle_options[], int count) {
 }
 
 // TODO: add case-insensitive compare
-void player_select(char *battle_options[], int count) {
+int player_select(char *battle_options[], int count) {
     char choice_buff[50];
-    int found = 0;
 
-    printf("Decide carefully. > ");
+    printf("Decide carefully. $ ");
     fgets(choice_buff, sizeof(choice_buff), stdin);
 
     // strip newline
@@ -52,13 +51,40 @@ void player_select(char *battle_options[], int count) {
         for (int i = 0; i < count; i++) {
         if (strcmp(choice_buff, battle_options[i]) == 0) {
             printf("Option selected: %s\n", battle_options[i]);
-            found = 1;
-            break;
+            return i;
         }
     }
+    return -1;  // no option found
+}
 
-    if (!found) {
-        printf("Invalid option was selected.\n");
+void player_attack(Player *p, Enemy *e) {    
+    int crit_chance = rand() % 10;
+
+    if (crit_chance == 0) {
+        int crit_value = calc_crit_dmg(p);
+        e->e_health -= crit_value;
+        printf("[CRITICAL] %s did %d damage to %s!\n", p->name, crit_value, e->title);
     }
-    
+    else {
+        e->e_health -= p->attack;
+        printf("%s did %d damage to %s!\n", p->name, p->attack, e->title);
+    }
+
+    if (e->e_health <= 0) {
+        printf("Enemy %s has died. %s wins!\n", e->title, p->name);
+    }
+}
+
+void player_run(Player *p) {
+    printf("%s was too much of a coward and flaked out. 0 exp gained.\n", p->name);
+}
+
+void enemy_attack(Player *p, Enemy *e) {
+    if (p->health <= 0) {
+        printf("%s tried hard, but not hard enough.\n", p->name);
+    }
+    else {
+        p->health -= e->e_attack;
+        printf("Enemy %s did %d damage to %s!\n", e->title, e->e_attack, p->name);
+    }
 }
