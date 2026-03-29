@@ -43,7 +43,7 @@ void player_select(char *battle_options[], int count) {
     char choice_buff[50];
     int found = 0;
 
-    printf("Decide carefully. >");
+    printf("Decide carefully. > ");
     fgets(choice_buff, sizeof(choice_buff), stdin);
 
     // strip newline
