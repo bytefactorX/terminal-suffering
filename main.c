@@ -1,6 +1,7 @@
 #include "src/player.h"
 #include "src/enemy.h"
 #include "src/battle.h"
+#include "src/dungeon.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -8,50 +9,43 @@
 int main() {
     srand(time(NULL));
 
+    // always begin in dungeon mode
+    GameState state = DUNGEON_MODE;
+    bool running = true;
+
     Player p;
     Enemy e;
 
     init_player(&p);
     init_rand_enemy(&e);
 
-    // testing purposes
+    // bool player_turn = determine_turn(&p, &e);
+
     printf("Player Name: %s\n Level: %d\n Health: %d\n Attack: %d\n Defense: %d\n Mp: %d\n", p.name,
     p.level, p.health, p.attack, p.defense, p.mp);
 
+    // testing purposes
     printf("Enemy Title: %s\n Health: %d\n Attack: %d\n Defense: %d\n",
     e.title, e.e_health, e.e_attack, e.e_defense);
 
-    // just like python, do not overcomplicate
-    bool player_turn = determine_turn(&p, &e);
+    while(running) {
+        // bool player_turn = determine_turn(&p, &e);
 
-    while (player_turn) {
-        print_battle_options(battle_options, NUM_BATTLE_OPTIONS);
-        int option_choice = player_select(battle_options, NUM_BATTLE_OPTIONS);
-
-        switch(option_choice) {
-            case 0:
-                player_attack(&p, &e);
-                player_turn = false;
+        switch (state) {
+            case DUNGEON_MODE:
+                state = dungeon_run();
                 break;
-            case 1:
-                printf("Run sp attack (mp) func here..\n");
-                player_turn = false;
+            case BATTLE_MODE:
+                state = battle_run(&p, &e, battle_options, NUM_BATTLE_OPTIONS);
                 break;
-            case 2:
-                printf("Run item use func here..\n");
-                player_turn = false;
-                break;
-            case 3:
-                player_run(&p);
+            case GAME_OVER:
+                printf("Oops, you died!\n");
+                running = false;
                 break;
             default:
-                printf("Invalid choice selected.\n");
+                printf("Game mode not found. quitting.\n");
+                running = false;
         }
-        break;
-    }
-    while (!player_turn) {
-        enemy_attack(&p, &e);
-        break;
     }
 
     return 0;

@@ -2,13 +2,13 @@
 CC = gcc
 
 # compilation flags
-CFLAGS = -Wall -Wextra -Iplayer -Ienemy -Ibattle
+CFLAGS = -Wall -Wextra -Iplayer -Ienemy -Ibattle -Idungeon
 
 # executable which will be made
 TARGET = game
 
 # all source C files
-SRC = main.c src/player.c src/enemy.c src/battle.c
+SRC = main.c src/player.c src/enemy.c src/battle.c src/dungeon.c
 
 # the out file made
 OBJ = $(SRC:.c=.o)

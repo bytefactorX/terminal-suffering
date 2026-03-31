@@ -39,7 +39,7 @@ As stated in the title, this is a WIP. There are many things that still need to 
 
 | feature       | start date    | end date  |
 | -------       | :-------:       | :-------:  |
-| dungeon loop  | N/A           | N/A       |
+| dungeon loop  | 03-31-26           | N/A       |
 | battle log           | N/A           | N/A       |
 | random player stats  | N/A        | N/A   |
 | more enemy variety   | N/A        | N/A   |
