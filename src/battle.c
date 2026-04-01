@@ -11,6 +11,7 @@ char *battle_options[NUM_BATTLE_OPTIONS] = {
     "Run"
 };
 
+// unused now
 bool determine_turn(Player *p, Enemy *e) {
     bool player_turn;
 
@@ -60,10 +61,12 @@ bool player_attack(Player *p, Enemy *e) {
         int crit_value = calc_crit_dmg(p);
         e->e_health -= crit_value;
         printf("[CRITICAL] %s did %d damage to %s!\n", p->name, crit_value, e->title);
+        print_battle_stats(p, e);
     }
     else {
         e->e_health -= p->attack;
         printf("%s did %d damage to %s!\n", p->name, p->attack, e->title);
+        print_battle_stats(p, e);
     }
 
     if (e->e_health <= 0) {
@@ -97,6 +100,7 @@ bool enemy_attack(Player *p, Enemy *e) {
     else {
         p->health -= e->e_attack;
         printf("Enemy %s did %d damage to %s!\n", e->title, e->e_attack, p->name);
+        print_battle_stats(p, e);
     }
 
     return false;
@@ -114,6 +118,8 @@ GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count) {
         switch(player_choice) {
             case 0:
                 if (player_attack(p, e)) {
+                    reset_enemy(e);
+                    player_win_sub(p);
                     return DUNGEON_MODE;
                 }
                 break;
@@ -125,6 +131,7 @@ GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count) {
                 break;
             case 3:
                 if (player_run(p)) {
+                    reset_enemy(e);
                     return DUNGEON_MODE;
                 }
                 break;

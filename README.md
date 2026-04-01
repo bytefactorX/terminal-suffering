@@ -41,7 +41,7 @@ As stated in the title, this is a WIP. There are many things that still need to 
 | -------       | :-------:       | :-------:  |
 | dungeon loop  | 03-31-26           | N/A       |
 | battle log           | N/A           | N/A       |
-| random player stats  | N/A        | N/A   |
+| random player stats  | 04-01-26        | 04-01-26   |
 | more enemy variety   | N/A        | N/A   |
 | loot items           | N/A        | N/A   |
 | save features        | N/A        | N/A   |

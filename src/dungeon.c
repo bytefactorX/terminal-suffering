@@ -1,27 +1,41 @@
 #include "dungeon.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void print_dungeon_level(int level) {
     printf("The current dungeon level is: %d\n", level);
 }
 
-// super basic for now, inc will occur once player
-// either defeats a certain enemy amt or something w/ a boss
-// then, if level = buff, 
-// run some win sequence
-int inc_dungeon_level(int level, int buff) {
-    if (level < buff) {
-        return (level + 1); 
-    }
+bool init_find_item() {
+    int item_chance = rand() % 4;
 
-    printf("Dungeon level incremented to: %d\n", level);
-    return buff;
+    if (item_chance == 0) {
+        return true;
+    }
+    return false;
+}
+
+bool init_rand_battle() {
+    int battle_chance = rand() % 5;
+
+    if (battle_chance == 0) {
+        return true;
+    }
+    return false;
 }
 
 GameState dungeon_run() {
     print_dungeon_level(DUNGEON_START);
 
-    inc_dungeon_level(DUNGEON_START, DUNGEON_LEVELS);
+    print_walking_cycle();
 
-    return BATTLE_MODE;
+    if (init_find_item()) {
+        printf("Found item!\n");
+    }
+
+    if (init_rand_battle()) {
+        return BATTLE_MODE;
+    }
+
+    return DUNGEON_MODE;
 }

@@ -14,4 +14,6 @@ void init_knight(Enemy *e);
 
 void init_rand_enemy(Enemy *e);
 
+void reset_enemy(Enemy *e);
+
 #endif

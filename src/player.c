@@ -1,9 +1,15 @@
 #include "player.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // initialize starting values
 void init_player(Player *p) {
+    int a_min = 10;
+    int a_max = 15;
+    int d_min = 22;
+    int d_max = 27;
+
     printf("Before your journey begins, please provide your name $ ");
     
     if (fgets(p->name, sizeof(p->name), stdin)) {
@@ -14,11 +20,17 @@ void init_player(Player *p) {
         p->name[23] = '\0';
     }
     p->health = 100;
-    p->attack = 10;
-    p->defense = 25;
+    p->attack = (rand() % (a_max - a_min + 1)) + a_min;
+    p->defense = (rand() % (d_max - d_min + 1)) + d_min;
     p->level = 1;
     p->exp = 0;
     p->mp = 5;
+}
+
+
+// super basic for now tbh 
+void gain_exp(Player *p) {
+    p->exp += 10;
 }
 
 // will want to add some logic handling to check if exp 
@@ -31,8 +43,7 @@ void level_up(Player *p) {
     p->mp +=1; 
 }
 
-// TODO: actually implement (will need to handle input to determine
-// what to upgrade )
+// TODO: actually implement (might be switched to an item logic file)
 void upgrade_player(Player *p) {
     return;
 }
@@ -43,4 +54,15 @@ int calc_crit_dmg(Player *p) {
     crit_value = (p->attack + p->level) * crit_mul;
 
     return crit_value;
+}
+
+// run everything if player wins
+void player_win_sub(Player *p) {
+    gain_exp(p);
+    print_player_expup(p);
+
+    if (p->exp == 100) {
+        level_up(p);
+        print_player_lvlup(p);
+    }
 }

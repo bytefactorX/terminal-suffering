@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include "player.h"
 #include "enemy.h"
+#include "output.h"
 #include "game_state.h"
-
 
 struct Player;
 struct Enemy;
@@ -21,6 +21,8 @@ bool determine_turn(struct Player *p, struct Enemy* e);
 void print_battle_options(char *battle_options[], int count);
 
 int player_select(char *battle_options[], int count);
+
+void print_battle_stats(struct Player *p, struct Enemy *e);
 
 bool player_attack(struct Player *p, struct Enemy *e);
 
