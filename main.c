@@ -33,7 +33,7 @@ int main() {
 
         switch (state) {
             case DUNGEON_MODE:
-                state = dungeon_run();
+                state = dungeon_run(&p, &e);
                 break;
             case BATTLE_MODE:
                 state = battle_run(&p, &e, battle_options, NUM_BATTLE_OPTIONS);

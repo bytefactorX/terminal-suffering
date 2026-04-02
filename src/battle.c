@@ -29,9 +29,12 @@ bool determine_turn(Player *p, Enemy *e) {
 
 // TODO: figure out cleaner print
 void print_battle_options(char *battle_options[], int count) {
+    printf("YOUR OPTIONS:\n");
+
     // decays down to char**, need to use a count
     for (int i = 0; i < count; i++) {
-        printf("%s \n", battle_options[i]);
+        // alignment + left padding in printf
+        printf("<<< %-10s >>>\n", battle_options[i]);
     }
 }
 
@@ -118,8 +121,13 @@ GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count) {
         switch(player_choice) {
             case 0:
                 if (player_attack(p, e)) {
+
                     reset_enemy(e);
-                    player_win_sub(p);
+                    if (player_win_sub(p) == 1) {
+                        print_player_lvlup(p);
+                    }
+                    print_player_expup(p);
+
                     return DUNGEON_MODE;
                 }
                 break;

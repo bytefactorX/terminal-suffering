@@ -57,12 +57,12 @@ int calc_crit_dmg(Player *p) {
 }
 
 // run everything if player wins
-void player_win_sub(Player *p) {
+int player_win_sub(Player *p) {
     gain_exp(p);
-    print_player_expup(p);
 
     if (p->exp == 100) {
         level_up(p);
-        print_player_lvlup(p);
+        return 1;
     }
+    return 0;
 }

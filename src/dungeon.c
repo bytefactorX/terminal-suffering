@@ -7,7 +7,7 @@ void print_dungeon_level(int level) {
 }
 
 bool init_find_item() {
-    int item_chance = rand() % 4;
+    int item_chance = rand() % 8;
 
     if (item_chance == 0) {
         return true;
@@ -24,7 +24,15 @@ bool init_rand_battle() {
     return false;
 }
 
-GameState dungeon_run() {
+// will call this dependent on how many enemies killed 
+int inc_dungeon_level(int level, int threshold) {
+    if (level < threshold) {
+        return level += 1;
+    }
+    return 0;
+}
+
+GameState dungeon_run(Player *p, Enemy*e) {
     print_dungeon_level(DUNGEON_START);
 
     print_walking_cycle();
@@ -34,6 +42,8 @@ GameState dungeon_run() {
     }
 
     if (init_rand_battle()) {
+        printf("BATTLE STARTING.\n");
+        print_battle_stats(p, e);
         return BATTLE_MODE;
     }
 

@@ -2,8 +2,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "output.h"
-
 typedef struct Player {
     char name[24];
     int health;
@@ -25,6 +23,6 @@ void upgrade_player(struct Player *p);
 
 int calc_crit_dmg(struct Player *p);
 
-void player_win_sub(struct Player *p);
+int player_win_sub(struct Player *p);
 
 #endif

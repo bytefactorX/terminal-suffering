@@ -36,6 +36,8 @@ bool player_run(struct Player *p);
 
 bool enemy_attack(struct Player *p, struct Enemy*e);
 
+int enemies_killed();
+
 GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count);
 
 #endif
