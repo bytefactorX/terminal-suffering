@@ -4,6 +4,18 @@ I'm keeping a change log for my own sanity throughout the project. I went into t
 
 A lot is going to change as this is a WIP, and the change log will help me understand what I did last in order to know what is next on the table. It is also to hold me accountable with how often I am working on this project and how committed I am to it. 
 
+## [WIP] 04-07-26
+
+### Added
+- dungeon level increment logic
+- MP attack functionality (has some issues)
+- minor printing improvements for text
+
+### To Do Next
+- improve MP attack logic
+- improve printing further
+- begin menu and/or item implementation
+
 ## [WIP] 04-01-26
 
 ### Added

@@ -84,6 +84,25 @@ bool player_attack(Player *p, Enemy *e) {
     return false;
 }
 
+bool player_sp_attack(Player *p, Enemy *e) {
+    if (e->e_health <= 0) {
+        e->e_health = 0;
+        printf("Enemy %s has died. %s wins!\n", e->title, p->name);
+
+        printf("Returning to DUNGEON MODE.\n");
+        return true;
+    }
+    else {
+        int mp_dmg = p->mp * 5;
+        e->e_health -= mp_dmg;
+        printf("%s did %d damage to %s!\n", p->name, mp_dmg, e->title);
+        use_mp(p);
+        print_battle_stats(p, e);
+    }
+
+    return false;
+}
+
 bool player_run(Player *p) {
     printf("%s was too much of a coward and flaked out. 0 exp gained.\n", p->name);
 
@@ -121,7 +140,6 @@ GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count) {
         switch(player_choice) {
             case 0:
                 if (player_attack(p, e)) {
-
                     reset_enemy(e);
                     if (player_win_sub(p) == 1) {
                         print_player_lvlup(p);
@@ -132,7 +150,15 @@ GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count) {
                 }
                 break;
             case 1:
-                printf("[DEV] Sp attack would be completed here\n");
+                if (player_sp_attack(p, e)) {
+                    reset_enemy(e);
+                    if (player_win_sub(p) == 1) {
+                        print_player_lvlup(p);
+                    }
+                    print_player_expup(p);
+
+                    return DUNGEON_MODE;
+                }
                 break;
             case 2:
                 printf("[DEV] Item select would be implemented here\n");

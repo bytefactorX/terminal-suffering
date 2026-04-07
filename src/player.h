@@ -18,10 +18,9 @@ void gain_exp(struct Player *p);
 
 void level_up(struct Player *p);
 
-// not yet implemented
-void upgrade_player(struct Player *p);
-
 int calc_crit_dmg(struct Player *p);
+
+void use_mp(struct Player *p);
 
 int player_win_sub(struct Player *p);
 

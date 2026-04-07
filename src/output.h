@@ -8,6 +8,10 @@
 struct Player;
 struct Enemy;
 
+void init_game_text();
+
+void print_player_ststats(struct Player *p);
+
 void print_battle_stats(struct Player *p, struct Enemy *e);
 
 void print_player_expup(struct Player *p);

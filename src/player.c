@@ -27,7 +27,6 @@ void init_player(Player *p) {
     p->mp = 5;
 }
 
-
 // super basic for now tbh 
 void gain_exp(Player *p) {
     p->exp += 10;
@@ -43,17 +42,20 @@ void level_up(Player *p) {
     p->mp +=1; 
 }
 
-// TODO: actually implement (might be switched to an item logic file)
-void upgrade_player(Player *p) {
-    return;
-}
-
 int calc_crit_dmg(Player *p) {
     float crit_mul = 1.5;
     int crit_value;
     crit_value = (p->attack + p->level) * crit_mul;
 
     return crit_value;
+}
+
+void use_mp(Player *p) {
+    p->mp -= 1;
+
+    if (p->mp == 0) {
+        printf("Out of MP!");
+    }
 }
 
 // run everything if player wins

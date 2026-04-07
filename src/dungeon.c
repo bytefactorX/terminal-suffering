@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_dungeon_level(int level) {
-    printf("The current dungeon level is: %d\n", level);
-}
+int count = 0;
+int dungeon_start = 1;
 
 bool init_find_item() {
     int item_chance = rand() % 8;
@@ -25,16 +24,21 @@ bool init_rand_battle() {
 }
 
 // will call this dependent on how many enemies killed 
-int inc_dungeon_level(int level, int threshold) {
-    if (level < threshold) {
-        return level += 1;
+int inc_dungeon_level(int dungeon_start, int threshold) {
+    if (dungeon_start < threshold) {
+        dungeon_start++;
+        printf("You've made it to dungeon level %d\n", dungeon_start);
+        return dungeon_start;
     }
-    return 0;
+    return threshold;
+}
+
+// this is always 1 for some reason
+void print_dungeon_level(int dungeon_start) {
+    printf("The current dungeon level is: %d\n", dungeon_start);
 }
 
 GameState dungeon_run(Player *p, Enemy*e) {
-    print_dungeon_level(DUNGEON_START);
-
     print_walking_cycle();
 
     if (init_find_item()) {
@@ -42,6 +46,16 @@ GameState dungeon_run(Player *p, Enemy*e) {
     }
 
     if (init_rand_battle()) {
+        // inc dungeon logic
+        count += 1;
+
+        if (count == ROUNDS) {
+            count = 0;  // reset lvls
+            dungeon_start = inc_dungeon_level(dungeon_start, DUNGEON_LEVELS);
+            print_dungeon_level(dungeon_start);
+        }
+
+        // init battle
         printf("BATTLE STARTING.\n");
         print_battle_stats(p, e);
         return BATTLE_MODE;

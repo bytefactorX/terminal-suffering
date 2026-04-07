@@ -3,17 +3,21 @@
 
 #include "game_state.h"
 #include "output.h"
+#include "battle.h"
 #include <stdbool.h>
 
 struct Player;
 struct Enemy;
 
+// amount of battles before increasing dungeon lvl
+#define ROUNDS 10
+
 #define DUNGEON_LEVELS 100
-#define DUNGEON_START 1
+extern int dungeon_start;
 
-void print_dungeon_level(int level);
+int inc_dungeon_level(int dungeon_start, int threshold);
 
-int inc_dungeon_level(int level, int threshold);
+void print_dungeon_level(int dungeon_start);
 
 bool init_find_item();
 

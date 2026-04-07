@@ -2,6 +2,15 @@
 #include <stdio.h>
 #include <unistd.h>
 
+void init_game_text() {
+    
+}
+
+void print_player_ststats(Player *p) {
+    printf("Player Name: %s\n Level: %d\n Health: %d\n Attack: %d\n Defense: %d\n Mp: %d\n", p->name,
+    p->level, p->health, p->attack, p->defense, p->mp);
+}
+
 void print_battle_stats(Player *p, Enemy *e) {
     printf("Player Name: %s\n Level: %d\n Health: %d\n Attack: %d\n Defense: %d\n Mp: %d\n", p->name,
     p->level, p->health, p->attack, p->defense, p->mp);

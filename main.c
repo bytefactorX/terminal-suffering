@@ -18,15 +18,9 @@ int main() {
 
     init_player(&p);
     init_rand_enemy(&e);
-
-    // bool player_turn = determine_turn(&p, &e);
-
-    printf("Player Name: %s\n Level: %d\n Health: %d\n Attack: %d\n Defense: %d\n Mp: %d\n", p.name,
-    p.level, p.health, p.attack, p.defense, p.mp);
-
-    // testing purposes
-    printf("Enemy Title: %s\n Health: %d\n Attack: %d\n Defense: %d\n",
-    e.title, e.e_health, e.e_attack, e.e_defense);
+    
+    print_dungeon_level(dungeon_start);
+    print_player_ststats(&p);
 
     while(running) {
         // bool player_turn = determine_turn(&p, &e);
@@ -40,6 +34,7 @@ int main() {
                 break;
             case GAME_OVER:
                 printf("Oops, you died!\n");
+                // will change to a continue option later
                 running = false;
                 break;
             default:

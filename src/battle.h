@@ -27,7 +27,7 @@ void print_battle_stats(struct Player *p, struct Enemy *e);
 bool player_attack(struct Player *p, struct Enemy *e);
 
 // not yet implemented
-void player_sp_attack(struct Player *p, struct Enemy *e);
+bool player_sp_attack(struct Player *p, struct Enemy *e);
 
 // not yet implemented
 void player_use_item(); 
@@ -35,8 +35,6 @@ void player_use_item();
 bool player_run(struct Player *p);
 
 bool enemy_attack(struct Player *p, struct Enemy*e);
-
-int enemies_killed();
 
 GameState battle_run(Player *p, Enemy *e, char *battle_options[], int count);
 
